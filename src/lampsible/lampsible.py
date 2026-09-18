@@ -615,7 +615,7 @@ class Lampsible:
             )
             print(runner.stats)
             rc = runner.rc
-        except (AssertionError, RuntimeError):
+        except RuntimeError:
             rc = 1
 
         self.cleanup_private_data()
