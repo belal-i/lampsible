@@ -87,7 +87,7 @@ Below are some examples:
 * Install a production ready Joomla site, add the www. subdomain to the website's domain config:
   ```
   lampsible someuser@somehost.com joomla \
-      --email-for-ssl you@yourdomain.com
+      --email-for-ssl you@yourdomain.com \
       --www-subdomain
   ```
 
@@ -99,9 +99,9 @@ Below are some examples:
       --database-system-user-host otheruser@dbserver.somehost.com \
       --database-host 10.0.1.2 \
       --database-username dbuser \
-      --database-port 6033
+      --database-port 6033 \
       --ssl-test-cert \
-      --apache-server-admin you@yourdomain.com \
+      --apache-server-admin you@yourdomain.com
   ```
 
 * Set up a LAMP stack with various custom configuration and a self signed SSL certificate on some local VM:
@@ -204,6 +204,7 @@ result = lampsible.run()
 * Why not just use Docker?
 
 Lampsible is intended to be an homage to the old school: A simple and versatile LAMP stack.
-If you want something similar with Docker, consider using [Docksible](https://github.com/belal-i/docksible),
-another project that I maintain. It will install a web app onto your remote server with Docker Compose.
-It also leverages Ansible locally under the hood.
+For a similar tool, that deploys production ready web apps via Docker containers,
+consider using [Dokku Scrubs](https://github.com/belal-i/dokku-scrubs),
+another project that I maintain. It is a convenient CLI wrapper around
+[Dokku](https://dokku.com), an excellent and lightweight open source PaaS tool.

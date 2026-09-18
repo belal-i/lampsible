@@ -362,8 +362,11 @@ class Lampsible:
 
         if host_is_local(self.web_host):
             web_host_dict['ansible_connection'] = 'local'
+            web_host_dict['ansible_python_interpreter'] = '/usr/bin/python3'
+
         if host_is_local(self.database_system_host):
             database_host_dict['ansible_connection'] = 'local'
+            database_host_dict['ansible_python_interpreter'] = '/usr/bin/python3'
 
         self.inventory = {
             'all': {'hosts': {}},
@@ -612,7 +615,7 @@ class Lampsible:
             )
             print(runner.stats)
             rc = runner.rc
-        except (AssertionError, RuntimeError):
+        except RuntimeError:
             rc = 1
 
         self.cleanup_private_data()
