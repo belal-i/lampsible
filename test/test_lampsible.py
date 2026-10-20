@@ -63,6 +63,13 @@ class TestLampsible(unittest.TestCase):
         self._do_test_run()
 
 
+    def test_database_bind_address(self):
+        self.lampsible.set_action('mysql')
+        self.lampsible.database_name = 'test_database'
+        self.lampsible.database_bind_address = '0.0.0.0'
+        self._do_test_run()
+
+
     def test_simple_php(self):
         self.lampsible.set_action('php')
         self._do_test_run()

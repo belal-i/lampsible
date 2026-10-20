@@ -337,10 +337,19 @@ def main():
     parser.add_argument('--database-table-prefix',
         default=DEFAULT_DATABASE_TABLE_PREFIX,
         help="""
-        prefix for your database tables, this is currently only used by
-        WordPress, where it defaults to '{}'
-        """.format(DEFAULT_DATABASE_TABLE_PREFIX)
+        Prefix for your database tables, this is currently only used by
+        WordPress. Leave it blank unless you need it.
+        """
     )
+    parser.add_argument('--database-bind-address',
+        default=DEFAULT_DATABASE_BIND_ADDRESS,
+        choices=VALID_DATABASE_BIND_ADDRESSES,
+        help="""
+        The bind-address setting of your database. Leave it blank to default
+        to '{}', unless you're doing something more complex.
+        """.format(DEFAULT_DATABASE_BIND_ADDRESS)
+    )
+
 
     # PHP
     # ---
@@ -581,6 +590,7 @@ def main():
         database_table_prefix=args.database_table_prefix,
         database_system_user=args.database_system_user,
         database_system_host=args.database_system_host,
+        database_bind_address=args.database_bind_address,
         phpmyadmin=args.phpmyadmin,
         php_version=args.php_version,
         php_extensions=args.php_extensions,
