@@ -37,6 +37,7 @@ class Lampsible:
             apache_document_root=DEFAULT_APACHE_DOCUMENT_ROOT,
             database_password=None,
             database_table_prefix=DEFAULT_DATABASE_TABLE_PREFIX,
+            database_bind_address=DEFAULT_DATABASE_BIND_ADDRESS,
             php_extensions=[],
             # TODO: In a future version, it should be possible to make these
             # settings default to None, and then dynamically exclude them from the
@@ -113,6 +114,11 @@ class Lampsible:
         self.database_host          = database_host
         self.database_port          = database_port
         self.database_table_prefix  = database_table_prefix
+
+        if self.database_system_host != self.web_host:
+            self.database_bind_address = '0.0.0.0'
+        else:
+            self.database_bind_address = database_bind_address
 
         self.php_version             = php_version
         self.php_extensions          = php_extensions
@@ -402,6 +408,7 @@ class Lampsible:
             'database_host',
             'database_port',
             'database_table_prefix',
+            'database_bind_address',
             'phpmyadmin',
             'php_version',
             'php_packages_extra',
@@ -469,7 +476,6 @@ class Lampsible:
             # TODO: This one especially... use Ansible Runner's
             # dedicated password feature.
             'ansible_sudo_pass',
-            'open_database',
         ])
 
         for varname in extravars:
@@ -525,13 +531,6 @@ class Lampsible:
                     value = self.remote_sudo_password
                 else:
                     continue
-
-            elif varname == 'open_database':
-                if self.database_system_host is None \
-                        or self.database_system_host == self.web_host:
-                    value = False
-                else:
-                    value = True
 
             else:
                 value = getattr(self, varname)
