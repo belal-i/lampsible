@@ -73,7 +73,7 @@
     host: "{{ '%' if database_bind_address != '127.0.0.1' else 'localhost' }}"
     # TODO
     #encrypted: true
-    priv: '{{ database_name }}.*:ALL'
+    priv: "{{ '*' if database_user_full_privilege else database_name }}.*:ALL"
     state: present
     login_unix_socket: /run/mysqld/mysqld.sock
   when: database_username != None and database_username | length > 0
