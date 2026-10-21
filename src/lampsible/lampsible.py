@@ -38,6 +38,7 @@ class Lampsible:
             database_password=None,
             database_table_prefix=DEFAULT_DATABASE_TABLE_PREFIX,
             database_bind_address=DEFAULT_DATABASE_BIND_ADDRESS,
+            database_user_full_privilege=False,
             php_extensions=[],
             # TODO: In a future version, it should be possible to make these
             # settings default to None, and then dynamically exclude them from the
@@ -119,6 +120,8 @@ class Lampsible:
             self.database_bind_address = '0.0.0.0'
         else:
             self.database_bind_address = database_bind_address
+
+        self.database_user_full_privilege = database_user_full_privilege
 
         self.php_version             = php_version
         self.php_extensions          = php_extensions
@@ -409,6 +412,7 @@ class Lampsible:
             'database_port',
             'database_table_prefix',
             'database_bind_address',
+            'database_user_full_privilege',
             'phpmyadmin',
             'php_version',
             'php_packages_extra',

@@ -349,6 +349,13 @@ def main():
         to '{}', unless you're doing something more complex.
         """.format(DEFAULT_DATABASE_BIND_ADDRESS)
     )
+    parser.add_argument('--database-user-full-privilege', action='store_true',
+        help="""
+        Grants the database user ALL PRIVILEGES ON *.*, instead of only on
+        the specified database. Pass this flag if you intend to administer
+        multiple databases with a single database user.
+        """
+    )
 
 
     # PHP
@@ -591,6 +598,7 @@ def main():
         database_system_user=args.database_system_user,
         database_system_host=args.database_system_host,
         database_bind_address=args.database_bind_address,
+        database_user_full_privilege=args.database_user_full_privilege,
         phpmyadmin=args.phpmyadmin,
         php_version=args.php_version,
         php_extensions=args.php_extensions,
