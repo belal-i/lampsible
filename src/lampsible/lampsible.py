@@ -116,12 +116,8 @@ class Lampsible:
         self.database_port          = database_port
         self.database_table_prefix  = database_table_prefix
 
-        if self.database_system_host != self.web_host:
-            self.database_bind_address = '0.0.0.0'
-        else:
-            self.database_bind_address = database_bind_address
-
-        self.database_user_full_privilege = database_user_full_privilege
+        self.set_database_bind_address(database_bind_address)
+        self.set_database_user_full_privilege(database_user_full_privilege)
 
         self.php_version             = php_version
         self.php_extensions          = php_extensions
@@ -249,6 +245,18 @@ class Lampsible:
 
         else:
             return [self.web_host]
+
+
+    def set_database_bind_address(self, database_bind_address):
+        if self.database_system_host != self.web_host:
+            self.database_bind_address = '0.0.0.0'
+        else:
+            self.database_bind_address = database_bind_address
+
+
+    def set_database_user_full_privilege(self, database_user_full_privilege):
+        self.database_user_full_privilege = database_user_full_privilege \
+                or not self.database_name
 
 
     def _set_apache_vars(self):
