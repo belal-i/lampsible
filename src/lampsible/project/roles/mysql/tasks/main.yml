@@ -8,16 +8,13 @@
     name: python3-pymysql
     state: present
 
-- name: Configure MySQL to listen on all interfaces
+- name: Configure MySQL to listen on specified interface
   lineinfile:
     path: /etc/mysql/mysql.conf.d/mysqld.cnf
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
+    regexp: '^bind-address'
+    line: 'bind-address = {{ database_bind_address }}'
     state: present
     backup: yes
-  loop:
-    - { regexp: '^bind-address', line: 'bind-address = 0.0.0.0' }
-  when: open_database
 
 - name: Configure MySQL to listen on the specified port
   lineinfile:
@@ -30,11 +27,11 @@
 # - name: Open MySQL port in firewall
 #   ansible.posix.firewalld:
 #     # TODO: variable database_port
-#     port: 3306/tcp
+#     port: '{{ database_port }}/tcp'
 #     permanent: yes
 #     state: enabled
 #     immediate: yes
-#   when: open_database
+#   when: database_bind_address != '127.0.0.1'
 
 - name: Set root database password
   ansible.mysql.mysql_user:
@@ -73,10 +70,10 @@
     name:     "{{ database_username }}"
     plugin: caching_sha2_password
     plugin_auth_string: "{{ database_password }}"
-    host: "{{ '%' if open_database else 'localhost' }}"
+    host: "{{ '%' if database_bind_address != '127.0.0.1' else 'localhost' }}"
     # TODO
     #encrypted: true
-    priv: '{{ database_name }}.*:ALL'
+    priv: "{{ '*' if database_user_full_privilege else database_name }}.*:ALL"
     state: present
     login_unix_socket: /run/mysqld/mysqld.sock
   when: database_username != None and database_username | length > 0

@@ -55,11 +55,13 @@ DEFAULT_APACHE_DOCUMENT_ROOT = '/var/www/html'
 
 # Database
 # --------
-DEFAULT_DATABASE_ENGINE       = 'mysql'
+#DEFAULT_DATABASE_ENGINE       = 'mysql'
 DEFAULT_DATABASE_USERNAME     = 'db-username'
 DEFAULT_DATABASE_HOST         = 'localhost'
 DEFAULT_DATABASE_PORT         = 3306
 DEFAULT_DATABASE_TABLE_PREFIX = ''
+DEFAULT_DATABASE_BIND_ADDRESS = '127.0.0.1'
+VALID_DATABASE_BIND_ADDRESSES = ['127.0.0.1', '0.0.0.0']
 
 # PHP
 # ---
@@ -143,15 +145,15 @@ DEFAULT_WORDPRESS_LOCALE  = 'en_US'
 RECENT_WORDPRESS_VERSIONS = [
     'latest',
     'nightly',
-    '7.1.1', '7.1',
-    '7.0.5', '7.0.4', '7.0.3', '7.0.2', '7.0.1', '7.0',
-    '6.9.8', '6.9.7', '6.9.6', '6.9.5', '6.9.4', '6.9.3', '6.9.2', '6.9.1', '6.9',
-    '6.8.9', '6.8.8', '6.8.7', '6.8.6', '6.8.5', '6.8.4', '6.8.3', '6.8.2', '6.8.1', '6.8',
+    '7.1.3', '7.1.2', '7.1.1', '7.1',
+    '7.0.7', '7.0.6', '7.0.5', '7.0.4', '7.0.3', '7.0.2', '7.0.1', '7.0',
+    '6.9.10', '6.9.9', '6.9.8', '6.9.7', '6.9.6', '6.9.5', '6.9.4', '6.9.3', '6.9.2', '6.9.1', '6.9',
+    '6.8.11', '6.8.10', '6.8.9', '6.8.8', '6.8.7', '6.8.6', '6.8.5', '6.8.4', '6.8.3', '6.8.2', '6.8.1', '6.8',
 ]
 
 # Joomla
 # ------
-DEFAULT_JOOMLA_VERSION         = '6.1.3'
+DEFAULT_JOOMLA_VERSION         = '6.1.4'
 DEFAULT_JOOMLA_ADMIN_FULL_NAME = 'Sample User'
 
 # Drupal
