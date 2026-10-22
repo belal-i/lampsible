@@ -296,7 +296,7 @@ def main():
         Be advised that Ansible Runner will write sensitive data here,
         like your private SSH key and passwords,
         but Lampsible will delete this directory when it finishes.
-        """
+        """.format(DEFAULT_PRIVATE_DATA_DIR)
     )
 
     # Apache
