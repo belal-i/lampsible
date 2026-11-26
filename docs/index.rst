@@ -228,6 +228,17 @@ It could look something like this:
 FAQ
 ---
 
+How to update Ansible Galaxy dependencies?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+tl;dr: Use the ``--galaxy-force`` flag.
+
+It's possible that you installed Lampsible locally some time ago, and now you
+want to deploy something on an Ubuntu 26 server, and it's failing, because your
+local Ansible Galaxy dependencies are outdated. In that case, just add the
+``--galaxy-force`` or ``--galaxy-force-with-deps`` flag to force Lampsible to
+update your local Ansible Galaxy dependencies.
+
 Why not just use Docker?
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
