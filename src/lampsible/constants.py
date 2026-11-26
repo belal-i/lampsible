@@ -108,7 +108,6 @@ REQUIRED_PHP_EXTENSIONS = {
         'soap',
         'xml',
         'zip',
-        'imap',
         'ldap',
     ],
 }
