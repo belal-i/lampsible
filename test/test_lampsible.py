@@ -84,13 +84,6 @@ class TestLampsible(unittest.TestCase):
 
     def test_full_php(self):
         self.lampsible.set_action('php')
-        # You can test this further by building a VPS with Ubuntu 20,
-        # then leaving this unchanged - that should fail.
-        # Then change it to 7.4, and it should work.
-        # This php_version stuff is pretty cumbersome... and most of the time,
-        # it can be left blank... I think I want to drop support for
-        # this in the next major version.
-        self.lampsible.php_version = '8.3'
         self.lampsible.php_extensions = [
             'php-mysql',
             'php-xml',
