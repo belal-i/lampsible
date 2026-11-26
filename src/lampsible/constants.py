@@ -181,8 +181,8 @@ DEFAULT_LARAVEL_ARTISAN_COMMANDS = [
 SUPPORTED_SUITECRM_VERSIONS = ['7', '8']
 DEFAULT_SUITECRM_VERSION = '8'
 SUITECRM_BUILD_URLS = {
-    '7': 'https://suitecrm.com/download/141/suite714/564663/suitecrm-7-14-6.zip',
-    '8': 'https://suitecrm.com/download/165/suite88/565090/suitecrm-8-8-0.zip',
+    '7': 'https://suitecrm.com/download/167/suite715/569254/suitecrm-7-15-2.zip',
+    '8': 'https://suitecrm.com/download/168/suite810/569258/suitecrm-8-10-2.zip',
 }
 
 # Misc
