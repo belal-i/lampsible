@@ -45,6 +45,12 @@ class TestLampsible(unittest.TestCase):
         self.assertIn(__version__, self.lampsible.banner)
 
 
+    def test_dump_ansible_facts(self):
+        self.lampsible.set_action('dump-ansible-facts')
+        self.lampsible.ssl_certbot = False
+        self._do_test_run()
+
+
     def test_apache(self):
         self.lampsible.set_action('apache')
         self.lampsible.ssl_certbot = False
