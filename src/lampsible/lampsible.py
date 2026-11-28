@@ -227,7 +227,10 @@ class Lampsible:
             if ext not in self.php_extensions:
                 self.php_extensions.append(ext)
 
-        self.playbook = f'{self.action}.yml'
+        self.playbook = (
+            None if self.action == 'dump-ansible-facts'
+            else f'{self.action}.yml'
+        )
 
 
     @property
@@ -594,17 +597,6 @@ class Lampsible:
         print('Roles installed.')
 
 
-    # TODO: Do it this way?
-    #def dump_ansible_facts(self):
-    #    from ansible_runner import run as ansible_runner_run,
-    #    ansible_runner_run(
-    #        private_data_dir=self.private_data_dir,
-    #        host_pattern=self.web_host,
-    #        module='setup',
-    #        module_args='no_log=true'
-    #    )
-
-
     def cleanup_private_data(self):
         rmtree(self.private_data_dir)
 
@@ -616,16 +608,31 @@ class Lampsible:
 
         rc = 1
         try:
-            runner = runner_interface.run(
-                private_data_dir=self.private_data_dir,
-                playbook=self.playbook,
-                inventory=self.inventory,
-                extravars=self.extravars,
-                project_dir=PROJECT_DIR,
-                ssh_key=self.ssh_key_data,
-            )
-            print(runner.stats)
-            rc = runner.rc
+            if self.action == 'dump-ansible-facts':
+                run_command(
+                    executable_cmd='ansible',
+                    cmdline_args=[
+                        '-i',
+                        f'{self.web_user}@{self.web_host},',
+                        'ungrouped',
+                        '-m',
+                        'setup'
+                    ]
+                )
+                rc = 0
+
+            else:
+                runner = runner_interface.run(
+                    private_data_dir=self.private_data_dir,
+                    playbook=self.playbook,
+                    inventory=self.inventory,
+                    extravars=self.extravars,
+                    project_dir=PROJECT_DIR,
+                    ssh_key=self.ssh_key_data,
+                )
+                print(runner.stats)
+                rc = runner.rc
+
         except RuntimeError:
             rc = 1
 

@@ -1,6 +1,5 @@
 import argparse
 from textwrap import dedent
-from ansible_runner import Runner, RunnerConfig, run_command
 from . import __version__
 from .constants import *
 from .lampsible import Lampsible
@@ -640,24 +639,6 @@ def main():
         galaxy_force=args.galaxy_force,
         galaxy_force_with_deps=args.galaxy_force_with_deps,
     )
-
-    if args.action == 'dump-ansible-facts':
-        # TODO: Refactor this.
-        run_command(
-            executable_cmd='ansible',
-            cmdline_args=[
-                '-i',
-                '{}@{},'.format(
-                    args.web_user,
-                    args.web_host,
-                ),
-                'ungrouped',
-                '-m',
-                'setup'
-            ]
-        )
-        lampsible.cleanup_private_data()
-        return 0
 
     return lampsible.run()
 

@@ -29,7 +29,7 @@ This tool can automate almost anything that you'd expect from a LAMP stack.
 * Local host: Unix system with Python 3.9 or newer. Tested on Ubuntu Linux, Gentoo Linux and Linux Mint.
   Might work on macOS, but I haven't tested that. Won't work on Windows,
   because Ansible requires a Unix like system.
-* Remote server: Ubuntu >= 20, <= 24. You need SSH access and root privilege.
+* Remote server: Ubuntu >= 20, <= 26. You need SSH access and root privilege.
 * (Optional): Lampsible is designed so that you run it in your local CLI, and it installs a web app
   on your remote server. However, you can also run it locally. This is useful if you want to install
   a local test server. In that case, your local machine should be similar as the "remote server"
@@ -201,7 +201,17 @@ result = lampsible.run()
 
 ## FAQ
 
-* Why not just use Docker?
+### How to update Ansible Galaxy dependencies?
+
+**tl;dr**: Use the `--galaxy-force` flag.
+
+It's possible that you installed Lampsible locally some time ago, and now you
+want to deploy something on an Ubuntu 26 server, and it's failing, because your
+local Ansible Galaxy dependencies are outdated. In that case, just add the
+`--galaxy-force` or `--galaxy-force-with-deps` flag to force Lampsible to
+update your local Ansible Galaxy dependencies.
+
+### Why not just use Docker?
 
 Lampsible is intended to be an homage to the old school: A simple and versatile LAMP stack.
 For a similar tool, that deploys production ready web apps via Docker containers,
